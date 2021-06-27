@@ -71,6 +71,10 @@ func StartCluster(opts StartClusterOpts) (*TestClusterConfig, error) {
 		Servers: 1,
 	}
 
+	if opts.K3dCreateClusterOpts == nil {
+		opts.K3dCreateClusterOpts = &v1alpha2.SimpleConfig{}
+	}
+
 	_ = mergo.Merge(&simpleClusterConfig, opts.K3dCreateClusterOpts, mergo.WithOverride)
 
 	ctx := context.Background()
